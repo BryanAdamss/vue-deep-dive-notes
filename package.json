@@ -20,7 +20,8 @@
   "homepage": "https://github.com/BryanAdamss/vue-deep-dive-notes#readme",
   "devDependencies": {
     "commitizen": "^4.0.3",
-    "cz-conventional-changelog": "^3.0.2"
+    "cz-conventional-changelog": "^3.0.2",
+    "typescript": "^3.7.2"
   },
   "config": {
     "commitizen": {
