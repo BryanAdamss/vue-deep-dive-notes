@@ -1,0 +1,29 @@
+{
+  "name": "@bryanadamss/vue-deep-dive-notes",
+  "version": "1.0.0",
+  "description": "深入浅出vue.js 笔记及demos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BryanAdamss/vue-deep-dive-notes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BryanAdamss/vue-deep-dive-notes/issues"
+  },
+  "homepage": "https://github.com/BryanAdamss/vue-deep-dive-notes#readme",
+  "devDependencies": {
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.0.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
