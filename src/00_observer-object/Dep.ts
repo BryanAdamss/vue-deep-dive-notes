@@ -3,8 +3,6 @@
  * @description 依赖(Watcher实例)存放类 - 发布订阅模式
  */
 
-import { Watcher } from './types'
-
 function remove<T>(arr: T[], item: T): T[] | void {
   if (!arr.length) return
 
@@ -16,9 +14,9 @@ export default class Dep {
   subs: Watcher[] = [] // 存放某个Data的所有Watcher实例
 
   /**
-   * 添加依赖
+   * 添加
    *
-   * @param {*} sub Watcher实例
+   * @param {Watcher} sub Watcher实例
    * @memberof Dep
    */
   addSub(sub: Watcher): void {
@@ -26,9 +24,9 @@ export default class Dep {
   }
 
   /**
-   * 移除sub
+   * 移除
    *
-   * @param {*} sub
+   * @param {Watcher} sub Watcher实例
    * @memberof Dep
    */
   removeSub(sub: Watcher): void {
@@ -40,11 +38,9 @@ export default class Dep {
    *
    * @memberof Dep
    */
-  depend() {
+  depend(): void {
     // window.target 是一个全局唯一位置，临时存放某个读取了Data的Watch实例
-    if (window.target) {
-      this.addSub(window.target)
-    }
+    if (window.target) this.addSub(window.target)
   }
 
   /**
@@ -52,7 +48,7 @@ export default class Dep {
    *
    * @memberof Dep
    */
-  notify() {
+  notify(): void {
     const subs = this.subs.slice()
 
     subs.forEach(sub => {
