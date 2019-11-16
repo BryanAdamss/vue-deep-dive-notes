@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cm": "git-cz"
+    "dev": "node examples/server.js",
+    "commit": "git-cz"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,12 @@
   "devDependencies": {
     "commitizen": "^4.0.3",
     "cz-conventional-changelog": "^3.0.2",
-    "typescript": "^3.7.2"
+    "express": "^4.17.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0"
   },
   "config": {
     "commitizen": {
