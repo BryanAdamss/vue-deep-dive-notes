@@ -39,6 +39,8 @@ export default class Dep {
    * @memberof Dep
    */
   depend(): void {
+    console.log('Dep:depend', this.subs)
+
     // window.target 是一个全局唯一位置，临时存放某个读取了Data的Watch实例
     if (window.target) this.addSub(window.target)
   }
@@ -49,6 +51,7 @@ export default class Dep {
    * @memberof Dep
    */
   notify(): void {
+    console.log('Dep:notify', this.subs)
     const subs = this.subs.slice()
 
     subs.forEach(sub => {
