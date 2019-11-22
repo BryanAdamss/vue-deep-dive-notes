@@ -20,7 +20,6 @@ export default class Watcher {
   getter: any
 
   constructor(vm: any, expOrFn: string, cb?: any) {
-    debugger
     console.log('Watcher:constructor', vm, expOrFn, cb)
 
     this.vm = vm

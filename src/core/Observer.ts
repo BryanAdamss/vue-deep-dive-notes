@@ -5,6 +5,30 @@ import Dep from './Dep'
  * @description Observer类，负责将对象转为响应式
  */
 
+export default class Observer {
+  value: any
+  constructor(value: any) {
+    console.log('Observer:constructor', value)
+
+    this.value = value
+
+    if (!Array.isArray(value)) this.walk(value)
+  }
+
+  /**
+   * 遍历对象
+   *
+   * @param {*} obj 待遍历对象
+   * @memberof Observer
+   */
+  walk(obj: any) {
+    const keys = Object.keys(obj)
+    keys.forEach(k => {
+      defineReactive(obj, k, obj[k])
+    })
+  }
+}
+
 export function defineReactive(data: any, key: string, val: any): void {
   // 值是对象，递归遍历
   if (typeof val === 'object') new Observer(val)
@@ -30,29 +54,4 @@ export function defineReactive(data: any, key: string, val: any): void {
       dep.notify()
     }
   })
-}
-
-export default class Observer {
-  value: any
-  constructor(value: any) {
-    debugger
-    console.log('Observer:constructor', value)
-
-    this.value = value
-
-    if (!Array.isArray(value)) this.walk(value)
-  }
-
-  /**
-   * 遍历对象
-   *
-   * @param {*} obj 待遍历对象
-   * @memberof Observer
-   */
-  walk(obj: any) {
-    const keys = Object.keys(obj)
-    keys.forEach(k => {
-      defineReactive(obj, k, obj[k])
-    })
-  }
 }

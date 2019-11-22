@@ -1,5 +1,5 @@
-import Observer from '../../src/00_observer-object/Observer'
-import Watcher from '../../src/00_observer-object/Watcher'
+import Observer from '../../src/core/Observer'
+import Watcher from '../../src/core/Watcher'
 
 const $ = selector => document.querySelector(selector)
 
