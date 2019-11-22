@@ -32,6 +32,7 @@ module.exports = {
     filename: '[name].js',
     publicPath: '/__build__/'
   },
+  devtool: 'inline-source-map',
 
   module: {
     rules: [
