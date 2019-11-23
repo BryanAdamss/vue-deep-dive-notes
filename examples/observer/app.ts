@@ -10,6 +10,20 @@ const data = {
   }
 }
 
+const simpleArr = [1, 2, 3]
+const twoArr = [[1, 2], 3, [4, 5]]
+const objectArr = [
+  { name: 1 },
+  2,
+  {
+    name: 3,
+    child: {
+      name: 4,
+      list: [5, 6, 7]
+    }
+  }
+]
+
 const dataOb = new Observer(data) // 将data转为响应式
 
 const watcherFoo = new Watcher(data, 'foo', (newVal, oldVal) => {
@@ -31,3 +45,5 @@ $('#plusFoo').onclick = function() {
 $('#plusBaz').onclick = function() {
   data.bar.baz++
 }
+
+// TODO:验证数组

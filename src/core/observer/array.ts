@@ -35,8 +35,21 @@ methodsToPatch.forEach(method => {
     // 拿到定义在Array实例上的Observer实例
     const ob = this.__ob__
 
+    let inserted
+    switch (method) {
+      case 'push':
+      case 'unshift':
+        inserted = args
+        break
+      case 'splice':
+        inserted = args.slice(2)
+        break
+    }
+
+    if (inserted) ob?.observeArray(inserted)
+
     // 调用方法时，通知依赖进行更新
-    ob && ob.dep.notify()
+    ob?.dep?.notify()
 
     // 返回原始方法执行结果
     return result

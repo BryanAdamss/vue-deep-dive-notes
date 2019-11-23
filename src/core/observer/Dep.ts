@@ -10,7 +10,11 @@ function remove<T>(arr: T[], item: T): T[] | void {
   if (index > -1) return arr.splice(index, 1)
 }
 
+// Dep的唯一id
+let uid = 0
+
 export default class Dep {
+  id: number = uid++ // 唯一id
   subs: Watcher[] = [] // 存放某个Data的所有Watcher实例
 
   /**
@@ -24,7 +28,7 @@ export default class Dep {
   }
 
   /**
-   * 移除
+   * 移除订阅者
    *
    * @param {Watcher} sub Watcher实例
    * @memberof Dep
@@ -42,7 +46,7 @@ export default class Dep {
     console.log('Dep:depend', this.subs)
 
     // window.target 是一个全局唯一位置，临时存放某个读取了Data的Watch实例
-    if (window.target) this.addSub(window.target)
+    if (window.target) window.target.addDep(this)
   }
 
   /**

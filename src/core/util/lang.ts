@@ -43,3 +43,16 @@ export function parsePath(path: string): any {
     return obj
   }
 }
+
+/**
+ * 对象本身是否存在某属性
+ *
+ * @export
+ * @param {*} obj 待检测对象
+ * @param {string} key 要检测的key
+ * @returns {boolean} 是否存在属性
+ */
+const hasOwnProperty = Object.prototype.hasOwnProperty
+export function hasOwn(obj: any, key: string): boolean {
+  return hasOwnProperty.call(obj, key)
+}

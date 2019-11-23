@@ -3,4 +3,4 @@
  * @description 环境相关
  */
 
-export const supportProto = '__proto__' in {}
+export const hasProto = '__proto__' in {}
