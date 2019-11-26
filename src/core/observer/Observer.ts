@@ -6,7 +6,7 @@
 import Dep from './Dep'
 import { arrayMethods } from './array'
 
-import { isObject } from '../util'
+import { isObject, isValidArrayIndex } from '../util'
 import { hasProto } from './../util/env'
 import { def, hasOwn } from '../util/lang'
 
@@ -143,3 +143,63 @@ function dependArray(value: Array<any>) {
 }
 
 // TODO:$set、$delete
+
+/**
+ * Set a property on an object. Adds the new property and
+ * triggers change notification if the property doesn't
+ * already exist.
+ */
+export function set(target: any[] | Object, key: any, val: any): any {
+  // 处理数组
+  if (Array.isArray(target) && isValidArrayIndex(key)) {
+    target.length = Math.max(target.length, key)
+    target.splice(key, 1, val)
+    return val
+  }
+
+  // key已经存在，直接重新赋值，触发更新即可
+  if (key in target && !(key in Object.prototype)) {
+    target[key] = val
+    return val
+  }
+
+  // 处理新增属性
+  // target本身不是响应式的，则直接添加属性即可
+  const ob = target.__ob__
+  if (!ob) {
+    target[key] = val
+    return val
+  }
+
+  // target是响应式的，则将新增的key转为响应式，并手动触发更新
+  defineReactive(ob.value, key, val)
+  ob.dep.notify()
+  return val
+}
+
+/**
+ * Delete a property and trigger change if necessary.
+ */
+export function del(target: Array<any> | Object, key: any) {
+  // 数组使用spilice删除，在拦截器中触发更新
+  if (Array.isArray(target) && isValidArrayIndex(key)) {
+    target.splice(key, 1)
+    return
+  }
+
+  const ob = target.__ob__
+  // 无值，则不删除
+  if (!hasOwn(target, key)) {
+    return
+  }
+  // 删除值
+  delete target[key]
+
+  // 非响应式，不做处理
+  if (!ob) {
+    return
+  }
+
+  // 否则，触发更新
+  ob.dep.notify()
+}
