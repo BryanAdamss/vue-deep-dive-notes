@@ -16,7 +16,6 @@ export default class Observer {
   value: any
   dep: Dep
   constructor(value: any) {
-    debugger
     console.log('Observer:constructor', value)
 
     this.value = value

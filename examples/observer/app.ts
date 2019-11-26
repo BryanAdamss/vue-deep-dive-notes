@@ -10,19 +10,21 @@ const data = {
   }
 }
 
-window.simpleArr = [1, 2, 3]
-window.twoArr = [[1, 2], 3, [4, 5]]
-window.objectArr = [
-  { name: 1 },
-  2,
-  {
-    name: 3,
-    child: {
-      name: 4,
-      list: [5, 6, 7]
+window.vm = {
+  simpleArr: [1, 2, 3],
+  twoArr: [[1, 2], 3, [4, 5]],
+  objectArr: [
+    { name: 1 },
+    2,
+    {
+      name: 3,
+      child: {
+        name: 4,
+        list: [5, 6, 7]
+      }
     }
-  }
-]
+  ]
+}
 
 // const dataOb = new Observer(data) // 将data转为响应式
 
@@ -47,13 +49,13 @@ window.objectArr = [
 // }
 
 // TODO:验证数组
-const simpleArrOb = new Observer(simpleArr)
+const simpleArrOb = new Observer(window.vm)
 
 $('#pushOne').onclick = () => {
-  simpleArr.push(4)
-  console.log(simpleArr)
+  window.vm.simpleArr.push(4)
+  console.log('pushOne', window.vm.simpleArr)
 }
 
-const watchSimpleArr = new Watcher(window, 'simpleArr', (newVal, oldVal) => {
-  console.log(newVal, oldVal)
+const watchSimpleArr = new Watcher(window.vm, 'simpleArr', (newVal, oldVal) => {
+  console.log('watchSimpleArr', newVal, oldVal)
 })

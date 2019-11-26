@@ -29,7 +29,6 @@ methodsToPatch.forEach(method => {
     this: HackedArray<any>,
     ...args: any
   ) {
-    debugger
     // 调用原始方法
     const result = (originalMethod as any).apply(this, args) // this指向数组实例，因为arrayMethods是一个原型对象
 
