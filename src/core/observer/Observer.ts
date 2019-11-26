@@ -76,6 +76,11 @@ export function defineReactive(data: any, key: string, val: any): void {
 
       if (childOb) {
         childOb.dep.depend()
+
+        // 如果value是数组，则收集相关依赖
+        if (Array.isArray(val)) {
+          dependArray(val)
+        }
       }
 
       return val
@@ -125,6 +130,16 @@ export function copyAugment(target: any, src: any, keys: string[]): void {
   keys.forEach(k => {
     def(target, k, src[k])
   })
+}
+
+function dependArray(value: Array<any>) {
+  for (let e, i = 0, l = value.length; i < l; i++) {
+    e = value[i]
+    e && e.__ob__ && e.__ob__.dep.depend()
+    if (Array.isArray(e)) {
+      dependArray(e)
+    }
+  }
 }
 
 // TODO:$set、$delete
